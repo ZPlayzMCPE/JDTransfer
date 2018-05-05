@@ -68,10 +68,10 @@ class Loader extends PluginBase implements Listener {
         $block->z = $tile->z;
         $block->level = $tile->getLevel();
         $block->level->sendBlocks([$player], [$block]);
-        $JDC = Item::get(279, 0, 1);
-        $JDC->setCustomName(TF::YELLOW . "JDCraft : 19132\n " . TF::RED . $this->getSQL('JDCraft') . " players online!");
-        $JDE = Item::get(279, 0, 1);
-        $JDE->setCustomName(TF::YELLOW . "JDEnterprise : 19133\n " . TF::RED . $this->getSQL('JDEnterprise') . " players online!");
+        $JDC = Item::get(46, 0, 1);
+        $JDC->setCustomName(TF::YELLOW . "§6Void§bFactions§cPE " . TF::RED . $this->getSQL('Factions') . " players online!");
+        $JDE = Item::get(101, 0, 1);
+        $JDE->setCustomName(TF::YELLOW . "§6Void§bPrisons§cPE " . TF::RED . $this->getSQL('Prisons') . " players online!");
         $BC = Item::get(279, 0, 1);
         $BC->setCustomName(TF::YELLOW . "BlazeCraft : 20000\n " . TF::RED . $this->getSQL('Blazecraft') . " players online!");
         $tile->getInventory()->setItem(0, $JDC);
@@ -102,13 +102,13 @@ class Loader extends PluginBase implements Listener {
     public function onCheck(EntityInventoryChangeEvent $event){ //
         $player = $event->getEntity();
         $newItem = $event->getNewItem();
-        if($newItem->getName() === TF::YELLOW . "JDCraft : 19132\n " . TF::RED . $this->getSQL('JDCraft') . " players online!"){
+        if($newItem->getName() === TF::YELLOW . "§6Void§bFactions§cPE " . TF::RED . $this->getSQL('Factions') . " players online!"){
             $event->setCancelled();
-            $this->onTransfer($player, 'jdcraft.net', 19132);
+            $this->onTransfer($player, 'voidfactionspe.ml', 19132);
             return;
-        } elseif ($newItem->getName() === TF::YELLOW . "JDEnterprise : 19133\n " . TF::RED . $this->getSQL('JDEnterprise') . " players online!") {
+        } elseif ($newItem->getName() === TF::YELLOW . "§6Void§bPrisons§cPE " . TF::RED . $this->getSQL('Prisons') . " players online!") {
             $event->setCancelled();
-            $this->onTransfer($player, 'jdcraft.net', 19133);
+            $this->onTransfer($player, 'voidprisonspe.ml', 25641);
         } elseif ($newItem->getName() === TF::YELLOW . "BlazeCraft : 20000\n " . TF::RED . $this->getSQL('BlazeCraft') . " players online!") {
             $event->setCancelled();
             $this->onTransfer($player, 'jdcraft.net', 20000);
@@ -126,7 +126,7 @@ class Loader extends PluginBase implements Listener {
     public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args): bool{
         if($sender instanceof Player){
             switch(strtolower($cmd->getName())){
-                case "jdt":
+                case "vm":
                     $sender->sendMessage("JDTransfer running...");
                     $this->sendChestInventory($sender);
                     break;
